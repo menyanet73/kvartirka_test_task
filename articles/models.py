@@ -1,5 +1,4 @@
 from django.db import models
-from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Article(models.Model):
@@ -11,21 +10,25 @@ class Article(models.Model):
         return self.title
 
 
-class Comment(MPTTModel):
+class Comment(models.Model):
     author = models.CharField(max_length=50)
     text = models.TextField()
-    level = models.IntegerField()
+    level = models.IntegerField(default=1)
     article = models.ForeignKey(
         Article,
         on_delete=models.CASCADE,
         related_name='comments')
-    parent = TreeForeignKey(
+    parent = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
+        default=None,
         null=True,
         blank=True,
-        related_name='children',
     )
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.author
+
+    def get_children(self):
+        return Comment.objects.filter(parent=self)
