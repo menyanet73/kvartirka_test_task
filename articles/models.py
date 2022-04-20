@@ -4,7 +4,8 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class CommentManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().prefetch_related('children')
+        return (super().get_queryset().prefetch_related('children')
+                .order_by('created'))
 
 
 class Article(models.Model):
@@ -19,7 +20,7 @@ class Article(models.Model):
 class Comment(MPTTModel):
     author = models.CharField(max_length=50)
     text = models.TextField()
-    level = models.IntegerField(default=1)
+    # level = models.IntegerField(default=1)
     article = models.ForeignKey(
         Article,
         on_delete=models.CASCADE,
@@ -37,4 +38,8 @@ class Comment(MPTTModel):
     objects = CommentManager()
 
     def __str__(self) -> str:
-        return self.author
+        return self.author + ' ' + self.text[:10]
+
+    @property
+    def less_three(self):
+        return self.objects.filter(level=3)
