@@ -1,4 +1,10 @@
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
+
+
+class CommentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('children')
 
 
 class Article(models.Model):
@@ -10,7 +16,7 @@ class Article(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class Comment(MPTTModel):
     author = models.CharField(max_length=50)
     text = models.TextField()
     level = models.IntegerField(default=1)
@@ -18,17 +24,17 @@ class Comment(models.Model):
         Article,
         on_delete=models.CASCADE,
         related_name='comments')
-    parent = models.ForeignKey(
+    parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
         default=None,
         null=True,
         blank=True,
+        related_name='children',
+        db_index=True
     )
     created = models.DateTimeField(auto_now_add=True)
+    objects = CommentManager()
 
     def __str__(self) -> str:
         return self.author
-
-    def get_children(self):
-        return Comment.objects.filter(parent=self)
