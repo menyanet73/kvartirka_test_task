@@ -8,6 +8,8 @@ django = "*"
 django-mptt = "*"
 djangorestframework = "*"
 django-debug-toolbar = "*"
+drf-yasg = "*"
+psycopg2 = "*"
 
 [dev-packages]
 flake8 = "*"

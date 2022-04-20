@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'api',
     'articles',
     'debug_toolbar',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

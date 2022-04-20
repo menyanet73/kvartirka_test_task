@@ -15,7 +15,7 @@ class RecursiveSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         if instance.level > MAX_COMMENT_LEVEL:
-            url = (self.context.get('request').build_absolute_uri() 
+            url = (self.context.get('request').build_absolute_uri()
                    + str(instance.parent.pk))
             return url
         serializer = CommentSerializer(instance, context=self.context)

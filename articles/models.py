@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 
 
 class Article(models.Model):
@@ -31,7 +30,3 @@ class Comment(models.Model):
 
     def __str__(self) -> str:
         return self.author
-
-    def get_absolute_url(self):
-        return reverse("model_detail", kwargs={"pk": self.pk})
-
