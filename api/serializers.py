@@ -15,7 +15,9 @@ class RecursiveSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         if instance.level > MAX_COMMENT_LEVEL:
-            return
+            url = (self.context.get('request').build_absolute_uri() 
+                   + str(instance.parent.pk))
+            return url
         serializer = CommentSerializer(instance, context=self.context)
         return serializer.data
 
@@ -29,17 +31,13 @@ class CommentListSerializer(serializers.ListSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     article = serializers.PrimaryKeyRelatedField(read_only=True)
     children = RecursiveSerializer(many=True, required=False)
-    all_comments_url = serializers.SerializerMethodField(read_only=True)
-
-    def get_all_comments_url(self, obj):
-        pass
 
     class Meta:
         list_serializer_class = CommentListSerializer
         model = Comment
         fields = (
             'id', 'article', 'author', 'text', 'level', 'parent', 'created',
-            'children', 'all_comments_url',
+            'children',
         )
 
 
