@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'mptt',
     'api',
     'articles',
     'debug_toolbar',
@@ -58,8 +59,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'BlogDB',
+        'USER': 'DBUser',
+        'PASSWORD': 'netuser',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -105,7 +110,7 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ], 
+    ],
 }
 
 MAX_COMMENT_LEVEL = 3
