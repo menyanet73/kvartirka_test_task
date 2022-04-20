@@ -1,5 +1,5 @@
-# kvartirka_test_task
-REST API для системы комментариев блога.
+### kvartirka_test_task
+# REST API для системы комментариев блога.
 Позволяет создавать статьи и древовидные комментарии. 
 Стек: Python 3.10, Django 4.0, DRF, django-mptt, PostgreSQL, pipenv
 ## Начало работы
