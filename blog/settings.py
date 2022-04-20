@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'mptt',
     'api',
     'articles',
-    'debug_toolbar',
     'drf_yasg',
 ]
 
