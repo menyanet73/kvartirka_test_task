@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'articles',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -105,3 +106,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ], 
 }
+
+MAX_COMMENT_LEVEL = 3

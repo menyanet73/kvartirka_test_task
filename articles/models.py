@@ -24,11 +24,9 @@ class Comment(models.Model):
         default=None,
         null=True,
         blank=True,
+        related_name='children'
     )
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.author
-
-    def get_children(self):
-        return Comment.objects.filter(parent=self)
