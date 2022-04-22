@@ -1,14 +1,32 @@
 ### kvartirka_test_task
 # REST API для системы комментариев блога.
 Позволяет создавать статьи и древовидные комментарии. 
+Стек: Python 3.10, Django 4.0, DRF, django-mptt, PostgreSQL, pipenv
 
-## Возможности:
+## Основные возможности:
 - Методы **POST, GET** - добавление статьи, и получение списка статей
 ```
-/articles/ - 
+/articles
 ```
-/articles/ - 
-Стек: Python 3.10, Django 4.0, DRF, django-mptt, PostgreSQL, pipenv
+- Методы **GET** - получение статьи с id = article_id
+```
+/articles/{article_id}
+```
+- Методы **POST, GET** - добавление комментария, и получение списка комментариев к статье с id = article_id
+```
+/articles/{article_id}/comments
+```
+- Методы **GET** - получение комментария 
+```
+/articles/{article_id}/comments/{commend_id}
+```
+- Методы **POST** - добавление комментария в ответ на комментарий с id = comment_id
+```
+/articles/{article_id}/comments/{commend_id}/reply
+```
+***Более подробная документация доступна по адресу localhost:8000/swagger, после запуска проекта***
+
+
 ## Начало работы:
 #### Необходимо наличие установненной версии Python 3.10.4
 
