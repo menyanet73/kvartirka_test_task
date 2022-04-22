@@ -24,7 +24,7 @@
 ```
 /articles/{article_id}/comments/{commend_id}/reply
 ```
-***Более подробная документация доступна по адресу localhost:8000/swagger, после запуска проекта***
+***Более подробная документация доступна по адресу `localhost:8000/swagger`, после запуска проекта***
 
 
 ## Начало работы:
@@ -81,5 +81,5 @@ python3 manage.py runserver
 
 ### Документация для API доступна по ссылке:
 ```sh
-127.0.0.1:8000/swagger/
+localhost:8000/swagger/
 ```
